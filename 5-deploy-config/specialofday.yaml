@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: specialofday
+  annotations:
+    kubernetes.io/service-account.name: "specialofday-sa-name"
+type: kubernetes.io/service-account-token
+data:
+  entree: meatloaf

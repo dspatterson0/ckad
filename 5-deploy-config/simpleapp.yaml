@@ -1,0 +1,38 @@
+apiVersion: v1
+  name: simpleapp 
+  labels:
+    type: webserver
+spec:
+  containers:
+  - name: webcont
+    image: nginx
+    volumeMounts:
+    - mountPath: /etc/cars
+      name: car-vol
+    - name: nfs-vol
+      mountPath: /opt
+    env:
+    - name: ilike
+      valueFrom:
+        configMapKeyRef:
+          name: colors
+          key: favorite
+    envFrom:
+    - configMapRef:
+        name: colors
+    ports:
+    - containerPort: 80
+    readinessProbe:
+      exec:
+        command:
+        - ls
+        - /etc/cars
+      periodSeconds: 5
+  volumes:
+  - name: car-vol
+    configMap:
+      defaultMode: 420
+      name: fast-car
+  - name: nfs-vol
+    persistentVolumeClaim:
+      claimName: pvc-one
