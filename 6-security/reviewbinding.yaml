@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: review-rb
+subjects:
+- kind: ServiceAccount
+  name: securityaccount
+roleRef:
+  kind: ClusterRole
+  name: secrole
+  apiGroup: rbac.authorization.k8s.io

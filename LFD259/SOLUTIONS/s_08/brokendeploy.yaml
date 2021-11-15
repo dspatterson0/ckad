@@ -1,4 +1,5 @@
-apiVersion: extensions/v1beta1
+#apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -9,6 +10,9 @@ metadata:
   name: broken
   namespace: default
 spec:
+  selector:
+    matchLabels:
+      app: thirdpage
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
